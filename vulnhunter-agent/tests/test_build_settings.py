@@ -239,6 +239,16 @@ class TestBuildClaudeSettings:
         )
         assert out["env"]["CLAUDE_AUTOCOMPACT_PCT_OVERRIDE"] == "90"
 
+    def test_autocompact_defaults_to_90_for_fable(
+        self, agent_config_factory
+    ) -> None:
+        # Fable 5 runs a 1M context window by default, with no [1m] suffix.
+        cfg = agent_config_factory(autocompact_pct_override=None)
+        out = json.loads(
+            build_claude_settings(cfg, "tok", model="claude-fable-5")
+        )
+        assert out["env"]["CLAUDE_AUTOCOMPACT_PCT_OVERRIDE"] == "90"
+
     def test_autocompact_explicit_override_wins(
         self, agent_config_factory
     ) -> None:

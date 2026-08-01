@@ -17,10 +17,11 @@ from urllib.parse import urlparse
 
 from .config import AgentConfig
 
-# Match the 1-million-context variant of a Claude model. Used to pick a
-# higher autocompact threshold (more headroom) when the user opts into the
-# larger context window.
-_LONG_CONTEXT_RE = re.compile(r"\[1m\]|_1m\b", re.IGNORECASE)
+# Match models that run with a 1-million-token context window. Used to pick
+# a higher autocompact threshold (more headroom): either the explicit
+# opt-in variant suffix ([1m] / _1m), or a family whose default context is
+# already 1M with no suffix (Fable 5 / Mythos 5).
+_LONG_CONTEXT_RE = re.compile(r"\[1m\]|_1m\b|fable|mythos", re.IGNORECASE)
 
 # Deny system paths, restrict reads/writes to the cwd (cloned repo).
 # "." resolves to cwd inside Claude Code's sandbox.

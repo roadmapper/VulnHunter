@@ -18,14 +18,19 @@ trigger:
 **Step 0: Model check (interactive/direct invocation only).** When invoked
 interactively — i.e. path **B** below, with no "Pre-resolved scan metadata"
 block — inspect the model you are running as. If it is NOT Opus 4.7 or higher,
-**STOP immediately** and tell the user (do not run any tools, resolve the target,
-or offer the mode menu yet):
+and NOT Fable 5 (or Mythos 5), **STOP immediately** and tell the user (do not
+run any tools, resolve the target, or offer the mode menu yet):
 
 > ⚠️ VulnHunter is optimized for Claude Opus 4.7/4.8 and may be unreliable on other
 > models. Please switch with the `/model opus` command, then re-run `/vulnhunt`.
 
-Wait for the user. Only proceed past this step once they are on Opus, or if they
-explicitly reply that they want to continue on the current model anyway.
+Wait for the user. Only proceed past this step once they are on Opus or Fable, or
+if they explicitly reply that they want to continue on the current model anyway.
+
+If you ARE running as Fable 5 / Mythos 5, proceed — but warn once before starting:
+Fable's cybersecurity safety classifiers may decline some security-analysis
+requests mid-scan (`stop_reason: refusal`, category `cyber`). If a phase is
+refused, note it in the report and suggest re-running that phase on Opus.
 
 Skip this check under path **A** (agent-driven); the agent controls the model.
 

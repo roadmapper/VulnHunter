@@ -95,7 +95,7 @@ _READONLY_PROMPT_SUFFIX = (
 )
 
 
-_MODEL_FAMILIES = ("opus", "sonnet", "haiku", "gpt", "o3", "o1")
+_MODEL_FAMILIES = ("opus", "sonnet", "haiku", "fable", "mythos", "gpt", "o3", "o1")
 _LONG_CONTEXT_RE = re.compile(r"\[1m\]|_1m\b", re.IGNORECASE)
 
 
@@ -116,6 +116,7 @@ def _model_tag(model: str) -> str:
         claude-4.6-opus         -> opus46
         claude-sonnet-5         -> sonnet5
         claude-haiku-4-5        -> haiku45
+        claude-fable-5          -> fable5
     """
     lowered = model.lower().replace("claude-", "")
     long_context = bool(_LONG_CONTEXT_RE.search(lowered))

@@ -122,7 +122,7 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--model",
         default=None,
-        help="Override anthropic.model from config (e.g. claude-opus-4-8, claude-sonnet-5)",
+        help="Override anthropic.model from config (e.g. claude-opus-4-8, claude-sonnet-5, claude-fable-5)",
     )
 
     # ---- scan-mode flags -------------------------------------------------

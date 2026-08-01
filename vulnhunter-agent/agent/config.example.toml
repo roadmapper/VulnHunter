@@ -39,6 +39,12 @@
 auth_mode = "api_key"
 api_key = ""
 # Default model. Override per-invocation with --model.
+# Also supported: "claude-opus-5", "claude-fable-5" (Bedrock: cross-region
+# inference-profile IDs, e.g. "us.anthropic.claude-fable-5" — check your
+# region's Bedrock catalog). Note: Fable 5's cybersecurity safety classifiers
+# may refuse some security-analysis requests; Opus remains the recommended
+# scan model. Fable 5 also requires 30-day data retention on the org
+# (zero-data-retention orgs get a 400 on every request).
 model = "claude-opus-4-8"
 
 # --- bedrock_oauth mode only (leave blank for api_key mode) ---

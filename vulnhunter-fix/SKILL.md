@@ -104,8 +104,9 @@ Check your own model identity from your session system prompt (it says "You are 
 
 | You are | Action |
 |---------|--------|
-| Opus 4.x (any variant) | Proceed to Step 1. |
-| Sonnet 4.x | **Stop.** Tell the user, verbatim: `This skill is calibrated for Opus. Please run `/model claude-opus-4-8` and then re-invoke `/vulnhunter-fix`.` Do not run any other tool calls. |
+| Opus 4.x / Opus 5 (any variant) | Proceed to Step 1. |
+| Fable 5 / Mythos 5 | Proceed to Step 1, but note: Fable's cybersecurity safety classifiers may decline some fix-synthesis requests (`stop_reason: refusal`, category `cyber`). If that happens mid-run, tell the user and suggest re-invoking on `/model claude-opus-4-8`. |
+| Sonnet 4.x / Sonnet 5 | **Stop.** Tell the user, verbatim: `This skill is calibrated for Opus. Please run `/model claude-opus-4-8` and then re-invoke `/vulnhunter-fix`.` Do not run any other tool calls. |
 | Haiku 4.x | **Stop.** Same message as above. |
 
 This is interactive-mode only. Headless mode invokes the executor with a fixed Opus model under the hood and skips this gate.
