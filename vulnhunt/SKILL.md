@@ -21,8 +21,8 @@ block — inspect the model you are running as. If it is NOT Opus 4.7 or higher,
 and NOT Fable 5 (or Mythos 5), **STOP immediately** and tell the user (do not
 run any tools, resolve the target, or offer the mode menu yet):
 
-> ⚠️ VulnHunter is optimized for Claude Opus 4.7/4.8 and may be unreliable on other
-> models. Please switch with the `/model opus` command, then re-run `/vulnhunt`.
+> ⚠️ VulnHunter is optimized for Claude Opus 4.7 or newer and may be unreliable on
+> other models. Please switch with the `/model opus` command, then re-run `/vulnhunt`.
 
 Wait for the user. Only proceed past this step once they are on Opus or Fable, or
 if they explicitly reply that they want to continue on the current model anyway.

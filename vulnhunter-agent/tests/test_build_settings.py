@@ -249,6 +249,27 @@ class TestBuildClaudeSettings:
         )
         assert out["env"]["CLAUDE_AUTOCOMPACT_PCT_OVERRIDE"] == "90"
 
+    @pytest.mark.parametrize("model", ["claude-opus-5", "claude-sonnet-5"])
+    def test_autocompact_defaults_to_90_for_5_family(
+        self, agent_config_factory, model: str
+    ) -> None:
+        # Opus 5 / Sonnet 5 run a 1M context window by default; there is no
+        # 200K variant, so no [1m] suffix is needed.
+        cfg = agent_config_factory(autocompact_pct_override=None)
+        out = json.loads(build_claude_settings(cfg, "tok", model=model))
+        assert out["env"]["CLAUDE_AUTOCOMPACT_PCT_OVERRIDE"] == "90"
+
+    def test_autocompact_5_family_anchor_excludes_4x(
+        self, agent_config_factory
+    ) -> None:
+        # claude-opus-4-5 must NOT match the opus-5 pattern — 4.x models
+        # keep the 200K default unless the [1m] suffix opts in.
+        cfg = agent_config_factory(autocompact_pct_override=None)
+        out = json.loads(
+            build_claude_settings(cfg, "tok", model="claude-opus-4-5")
+        )
+        assert out["env"]["CLAUDE_AUTOCOMPACT_PCT_OVERRIDE"] == "85"
+
     def test_autocompact_explicit_override_wins(
         self, agent_config_factory
     ) -> None:

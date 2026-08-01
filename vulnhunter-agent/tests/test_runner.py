@@ -60,6 +60,7 @@ class TestModelTag:
             ("claude-4.6-opus", "opus46"),
             ("claude-4.6-opus[1M]", "opus46_1m"),
             ("claude-sonnet-5", "sonnet5"),
+            ("claude-opus-5", "opus5"),
             ("claude-haiku-4-5", "haiku45"),
             ("claude-fable-5", "fable5"),
             ("us.anthropic.claude-fable-5", "fable5"),

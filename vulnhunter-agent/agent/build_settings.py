@@ -19,9 +19,14 @@ from .config import AgentConfig
 
 # Match models that run with a 1-million-token context window. Used to pick
 # a higher autocompact threshold (more headroom): either the explicit
-# opt-in variant suffix ([1m] / _1m), or a family whose default context is
-# already 1M with no suffix (Fable 5 / Mythos 5).
-_LONG_CONTEXT_RE = re.compile(r"\[1m\]|_1m\b|fable|mythos", re.IGNORECASE)
+# opt-in variant suffix ([1m] / _1m), or a model whose default context is
+# already 1M with no suffix — Fable 5 / Mythos 5 (1M is the only size), and
+# Opus 5 / Sonnet 5 (1M default; no 200K variant exists, unlike the 4.x
+# models where [1m] was the opt-in). The 5-family patterns are anchored so
+# 4.x IDs like claude-opus-4-5 keep the 200K default.
+_LONG_CONTEXT_RE = re.compile(
+    r"\[1m\]|_1m\b|fable|mythos|opus-5\b|sonnet-5\b", re.IGNORECASE
+)
 
 # Deny system paths, restrict reads/writes to the cwd (cloned repo).
 # "." resolves to cwd inside Claude Code's sandbox.
