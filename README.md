@@ -20,8 +20,10 @@ Developed internally at Capital One, VulnHunter is released to the community bec
 
 > [!IMPORTANT]
 > **Prerequisites & Model Requirements**
-> Built and optimized for **Claude Opus** running in **[Claude Code](https://docs.claude.com/en/docs/claude-code)**. 
-> The framework depends on deep, multi-step reasoning and requires frontier Opus-class models. **You supply your own model access.**
+> Built and optimized for frontier reasoning models. The original skills run on
+> **Claude Opus** in **[Claude Code](https://docs.claude.com/en/docs/claude-code)**;
+> the headless scanner also supports **GPT-5.6 Sol at xhigh** through Codex or a
+> direct OpenAI-compatible Responses API. **You supply your own model access.**
 
 ---
 
@@ -59,6 +61,7 @@ Each component is organized into a self-contained subtree:
 | `vulnhunter-fix/` | The `/vulnhunter-fix` skill, its companion Python helper package, and tests. See [`vulnhunter-fix/README.md`](vulnhunter-fix/README.md). |
 | `vulnhunt-fix-verify/` | The `/vulnhunt-fix-verify` standalone verification skill (Prompt-only). See [`vulnhunt-fix-verify/README.md`](vulnhunt-fix-verify/README.md). |
 | `vulnhunter-agent/` | Config-driven headless runtime wrapper that runs scans and files GitHub issues. See [`vulnhunter-agent/README.md`](vulnhunter-agent/README.md). |
+| `.agents/skills/vulnhunt-codex/` | Codex-native static scan orchestrator that reuses the canonical `vulnhunt/phases/` prompts. |
 | `harness/` | Developer tooling for running large batch-scans and benchmarking detection accuracy. See [`harness/README.md`](harness/README.md). |
 
 ---
@@ -66,7 +69,8 @@ Each component is organized into a self-contained subtree:
 ## Requirements & Setup
 
 ### Prerequisites
-* [Claude Code CLI](https://docs.claude.com/en/docs/claude-code), authenticated with access to **Claude Opus**.
+* For the Claude backend: [Claude Code CLI](https://docs.claude.com/en/docs/claude-code), authenticated with access to **Claude Opus**.
+* For the Codex backend: [Codex CLI](https://learn.chatgpt.com/docs/non-interactive-mode) plus access to **GPT-5.6 Sol** through OpenAI or a compatible Responses endpoint.
 * Python 3.12+ (Required only for the runtime agent and the benchmarking harness).
 * *Responsibility Check:* Ensure you are only scanning code bases you are explicitly authorized to analyze.
 
@@ -171,7 +175,7 @@ cd vulnhunter-agent && pip install -e ".[dev]" && python -m pytest -q
 
 ## Contributing, Security & License
 
-* **A Note on Models:** VulnHunter was precision-tuned for **Claude Opus** and **Claude Code**. Its low false-positive discipline relies heavily on frontier-class reasoning, though the underlying orchestration patterns can be adapted to other advanced foundation models.
+* **A Note on Models:** VulnHunter's low false-positive discipline relies on frontier-class reasoning. Supported scan paths are Claude Opus/Claude Code and GPT-5.6 Sol xhigh through the headless OpenAI or Codex backends; cheaper model tiers are intentionally not selected automatically.
 * **Contributing:** See [CONTRIBUTING.md](CONTRIBUTING.md) to propose core framework improvements, prompt updates, or wider model support configurations.
 * **Security:** Review [SECURITY.md](SECURITY.md) for instructions on how to safely report security vulnerabilities found within VulnHunter itself.
 * **License:** Distributed under the terms of the Apache License, Version 2.0. See [LICENSE](LICENSE) for details.
