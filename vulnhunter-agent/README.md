@@ -47,6 +47,10 @@ repository. Packaged/container deployments should run the repository's
 `install.sh` during image construction so the canonical and Codex skills are
 available under the user skill directories.
 
+For Codex CLI installation, direct interactive skill invocation, and a focused
+compatible-endpoint walkthrough, see
+[`docs/codex-cli.md`](../docs/codex-cli.md).
+
 ## Quick start
 
 ```bash
